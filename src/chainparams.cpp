@@ -78,7 +78,7 @@ public:
     CMainParams()
     {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 1051200;
+        consensus.nSubsidyHalvingInterval = 8400;
         consensus.BIP16Height = 160000; //6466572a3c572d7b935243cb0c3e7c2bc8cd764086b0b42dd317341b646e2b13
         consensus.BIP34Height = 165000;
         consensus.BIP34Hash = uint256S("28897a5f663992a00d9ea38be63a72f710b0796b0623bca0f97ee6ab1250418e");// this hash need to be changed
@@ -111,7 +111,17 @@ public:
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00"); //160578
-
+        /* Start DigiShield params */
+        consensus.nAveragingInterval = 10; // 10 blocks
+        consensus.multiAlgoTargetSpacingV4 = consensus.nPowTargetSpacing; // 30 seconds
+        consensus.nMaxAdjustDownV4 = 16;
+        consensus.nMaxAdjustUpV4 = 8;
+        consensus.nAveragingTargetTimespanV4 = consensus.nAveragingInterval * consensus.multiAlgoTargetSpacingV4; // 10 * 30
+        consensus.nMinActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 - consensus.nMaxAdjustUpV4) / 100;
+        consensus.nMaxActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 + consensus.nMaxAdjustDownV4) / 100;
+        consensus.nLocalTargetAdjustment = 4; //target adjustment per algo
+        /* End DigiShield params */
+        consensus.nDigiSheildHFHeight = 100; //TODO akshaynexus set this for Mainnet
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
@@ -169,7 +179,7 @@ public:
     CTestNetParams()
     {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 1051200;
+        consensus.nSubsidyHalvingInterval = 8400;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 76;
         consensus.BIP34Hash = uint256S("8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573");

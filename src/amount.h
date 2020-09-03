@@ -15,8 +15,8 @@ static const CAmount COIN = 100000000;
 static const CAmount CENT = 1000000;
 //Initial reward from starting
 static const CAmount INITIAL_REWARD = 4756;
-//Same like nSubsidyHalvingInterval in chainparams as consensus.nSubsidyHalvingInterval = 1051200;
-static const CAmount YEARLY_INTERVAL = 1051200;
+//Same like nSubsidyHalvingInterval in chainparams as consensus.nSubsidyHalvingInterval = 8400;
+static const CAmount YEARLY_INTERVAL = 8400;
 
 /** No amount larger than this (in satoshi) is valid.
  *
